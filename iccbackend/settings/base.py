@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'home',
     'blog',
     'search',
+    'corsheaders',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -64,6 +65,7 @@ MIDDLEWARE = [
 
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'iccbackend.urls'
@@ -164,3 +166,5 @@ WAGTAIL_SITE_NAME = "iccbackend"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
+
+CORS_ORIGIN_ALLOW_ALL = True  
