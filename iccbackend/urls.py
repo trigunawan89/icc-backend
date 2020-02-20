@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls import include, url
 from django.contrib import admin
 
@@ -12,13 +13,21 @@ from .api import api_router
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
     url(r'^api/v2/', api_router.urls),
-    
+
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 
     url(r'^search/$', search_views.search, name='search'),
     
 ]
+
+urlpatterns += i18n_patterns(
+    # These URLs will have /<language_code>/ appended to the beginning
+
+    url(r'^search/$', search_views.search, name='search'),
+
+    url(r'', include(wagtail_urls)),
+)
 
 
 if settings.DEBUG:

@@ -24,6 +24,11 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+
+    'wagtail_modeltranslation',
+    'wagtail_modeltranslation.makemigrations',
+    'wagtail_modeltranslation.migrate',
+
     'home',
     'blog',
     'search',
@@ -42,6 +47,8 @@ INSTALLED_APPS = [
     'wagtail.core',
     'wagtail.api.v2',
     'rest_framework',
+
+
 
     'modelcluster',
     'taggit',
@@ -62,7 +69,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-
+    'django.middleware.locale.LocaleMiddleware',
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -168,3 +175,11 @@ WAGTAIL_SITE_NAME = "iccbackend"
 BASE_URL = 'http://example.com'
 
 CORS_ORIGIN_ALLOW_ALL = True  
+
+
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGES = (
+    ('en-us', _('English')),
+    ('id', _('Indonesian')),
+)
