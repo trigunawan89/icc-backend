@@ -11,8 +11,11 @@
 
     {% for post in page.get_children %}
         <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-        {{ post.specific.intro }}
-        {{ post.specific.body|richtext }}
+        {{ post.specific.intro_en }}
+        {{ post.specific.body_en|richtext }}
+
+        {{ post.specific.intro_id }}
+        {{ post.specific.body_id|richtext }}
     {% endfor %}
 
 {% endblock %}

@@ -25,12 +25,9 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
 
-    'wagtail_modeltranslation',
-    'wagtail_modeltranslation.makemigrations',
-    'wagtail_modeltranslation.migrate',
-
     'home',
     'blog',
+    'advisory',
     'search',
     'corsheaders',
 
@@ -177,9 +174,4 @@ BASE_URL = 'http://example.com'
 CORS_ORIGIN_ALLOW_ALL = True  
 
 
-from django.utils.translation import gettext_lazy as _
 
-LANGUAGES = (
-    ('en-us', _('English')),
-    ('id', _('Indonesian')),
-)

@@ -8,9 +8,14 @@
     <h1>{{ page.title }}</h1>
     <p class="meta">{{ page.date }}</p>
 
-    <div class="intro">{{ page.intro }}</div>
+    <div class="intro">{{ page.intro_en }}</div>
 
-    {{ page.body|richtext }}
+    {{ page.body_en |richtext }}
+
+
+    <div class="intro">{{ page.intro_id }}</div>
+
+    {{ page.body_id |richtext }}
 
     <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
 

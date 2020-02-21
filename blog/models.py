@@ -15,22 +15,35 @@ class BlogIndexPage(Page):
 
 class BlogPage(Page):
     date = models.DateField("Post date")
-    intro = models.CharField(max_length=250)
-    body = RichTextField(blank=True)
+
+    title_id = models.CharField(max_length=250)
+
+    intro_en = models.CharField(max_length=250)
+    intro_id = models.CharField(max_length=250)
+    body_en = RichTextField(blank=True)
+    body_id = RichTextField(blank=True)
 
     search_fields = Page.search_fields + [
-        index.SearchField('intro'),
-        index.SearchField('body'),
+        index.SearchField('intro_en'),
+        index.SearchField('body_en'),
     ]
 
     content_panels = Page.content_panels + [
+        FieldPanel('title_id'),
         FieldPanel('date'),
-        FieldPanel('intro'),
-        FieldPanel('body', classname="full"),
+        FieldPanel('intro_en'),
+        FieldPanel('body_en', classname="full"),
+        FieldPanel('intro_id'),
+        FieldPanel('body_id', classname="full"),
     ]
 
     api_fields = [
         APIField('date'),
-        APIField('intro'),
-        APIField('body'),
+        APIField('title'),
+        APIField('title_id'),
+        APIField('intro_en'),
+        APIField('body_en'),
+        APIField('intro_id'),
+        APIField('body_id'),
+        
     ]
