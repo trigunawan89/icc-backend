@@ -12,6 +12,17 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
+# reading .env file
+environ.Env.read_env()
+
+# False if not in os.environ
+DEBUG = env('DEBUG')
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -25,11 +36,9 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
 
-    'home',
-    'blog',
-    'advisory',
-    'search',
-    'corsheaders',
+    
+
+    
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -44,9 +53,7 @@ INSTALLED_APPS = [
     'wagtail.core',
     'wagtail.api.v2',
     'rest_framework',
-
-
-
+    
     'modelcluster',
     'taggit',
 
@@ -56,6 +63,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #third party
+    'wagtailgeowidget',
+    'wagtailautocomplete',
+
+
+    'home',
+    'country',
+    'city',
+    'sites',
+    'advisory',
+    'calendars',
+    'guideline',
+    'search',
+    'corsheaders',
+    
 ]
 
 MIDDLEWARE = [
@@ -132,7 +155,7 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = False
 
 USE_L10N = True
 
@@ -174,4 +197,11 @@ BASE_URL = 'http://example.com'
 CORS_ORIGIN_ALLOW_ALL = True  
 
 
+# AUTH_USER_MODEL = 'customuser.User'
+
+# WAGTAIL_USER_EDIT_FORM = 'customuser.forms.CustomUserEditForm'
+# WAGTAIL_USER_CREATION_FORM = 'customuser.forms.CustomUserCreationForm'
+# WAGTAIL_USER_CUSTOM_FIELDS = ['company', 'division']
+
+GOOGLE_MAPS_V3_APIKEY = env('GMAP_API_KEY')
 

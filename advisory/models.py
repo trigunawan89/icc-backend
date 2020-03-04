@@ -11,9 +11,13 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
-
+from wagtailautocomplete.edit_handlers import AutocompletePanel
 from wagtail.snippets.models import register_snippet
 from wagtail.api import APIField
+
+# import country
+from country.models import CountryPage
+
 
 class AdvisoryIndexPage(Page):
     intro = RichTextField(blank=True)
@@ -64,13 +68,16 @@ class AdvisoryCategory(models.Model):
     ]
 
 
+
 class AdvisoryPage(Page):
     date = models.DateField("Post date")
     title_id = models.CharField(max_length=250)
     body_en = RichTextField(blank=True)
     body_id = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=AdvisoryPageTag, blank=True)
-    categories = ParentalManyToManyField('advisory.AdvisoryCategory', blank=True)
+    categories = models.ForeignKey('advisory.AdvisoryCategory', blank=True, null=True,on_delete=models.SET_NULL)
+    country = models.ForeignKey('country.CountryPage', blank=True, null=True,on_delete=models.SET_NULL)
+    remark = models.CharField(max_length=250, blank=True)
 
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -89,24 +96,28 @@ class AdvisoryPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('title_id'),
+        AutocompletePanel('country'),
         MultiFieldPanel([
             FieldPanel('date'),
             FieldPanel('tags'),
-            FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
+            FieldPanel('categories'),
         ], heading="Advisory information"),        
         ImageChooserPanel('feed_image'),
         FieldPanel('body_en', classname="full"),
         FieldPanel('body_id', classname="full"),
+        FieldPanel('remark'),
         
     ]
 
     api_fields = [
         APIField('date'),
         APIField('categories'),
+        APIField('country'),
         APIField('title_id'),
         APIField('feed_image'),
         APIField('body_en'),
-        APIField('body_id'),  # This will nest the relevant BlogPageAuthor objects in the API response
+        APIField('body_id'),
+        APIField('remark'),
     ]
 
 class AdvisoryPageGalleryImage(Orderable):
