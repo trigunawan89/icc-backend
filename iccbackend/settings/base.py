@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 import environ
 env = environ.Env(
     # set casting, default value
@@ -67,7 +68,7 @@ INSTALLED_APPS = [
     #third party
     'wagtailgeowidget',
     'wagtailautocomplete',
-
+    'django_extensions',
 
     'home',
     'country',
@@ -126,6 +127,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': dj_database_url.config(
+    #     default="postgres://saleor:saleor@localhost:5432/saleor", conn_max_age=600
+    # )
 }
 
 
