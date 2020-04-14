@@ -30,7 +30,7 @@ sqlparse==0.3.0
 typed-ast==1.4.1
 Unidecode==1.1.1
 urllib3==1.25.8
-wagtail==2.8
+wagtail==2.8.1
 wagtail-autocomplete==0.5
 wagtailgeowidget==5.0.2
 webencodings==0.5.1
